@@ -1,9 +1,24 @@
 import os
 
 def agregar_paciente(lista: list, numero_historia: int, nombre: str, edad: int, diagnostico: str, dias: int):
+    """agrega un paciente a la lista con los datos cargados
+
+    Args:
+        lista (list): lista de pacientes
+        numero_historia (int): numero de historia clinica
+        nombre (str): _nombre del paciente
+        edad (int): edad del paciente
+        diagnostico (str): diagnostico del paciente
+        dias (int): dias de internacion
+    """
     lista.append([numero_historia ,nombre, edad, diagnostico, dias])
 
 def cargar_pacientes(lista: list):
+    """carga uno o mas pacientes con los datos cargados por el usuario
+
+    Args:
+        lista (list): lista de pacientes
+    """
     respuesta = "si"
     while respuesta == "si":
         numero_historia = int(input("numero Historia Clinica: "))
@@ -16,27 +31,54 @@ def cargar_pacientes(lista: list):
         agregar_paciente(lista, numero_historia, nombre, edad, diagnostico, dias)
 
 def mostrar_pacientes(lista: list):
+    """muestra la lista de pacientes
+
+    Args:
+        lista (list): lista de pacientes
+    """
     for paciente in lista:
         print(paciente)
 
 def buscar_paciente(lista: list, numero_historia: int):
+    """busca un paciente por su numero de historia clinica
+
+    Args:
+        lista (list): lista de pacientes
+        numero_historia (int): numero de historia clinica a buscar
+
+    Returns:
+        _type_: retorna el paciente solicitado o un mensaje de que no lo encontro 
+    """
     for paciente in lista:
         if paciente[0] == numero_historia:
             return paciente
-    return f"no se encontro al apciente con el numero de historia clinica {numero_historia}"
+    return f"no se encontro al paciente con el numero de historia clinica {numero_historia}"
 
-def ordenar_lista(arreglo: list):
+def ordenar_lista(lista: list):
+    """ordena la lista de menor a mayor por su numero de historia clinica
 
-    n = len(arreglo)
+    Args:
+        lista (list): lista de pacientes
+    """
+
+    n = len(lista)
 
     for i in range(n-1):       
             for j in range(n-1-i):
-                if arreglo[j][0] > arreglo[j+1][0]:
-                    aux = arreglo[j+1][0]
-                    arreglo[j+1][0] = arreglo[j][0]
-                    arreglo[j][0] = aux
+                if lista[j][0] > lista[j+1][0]:
+                    aux = lista[j+1][0]
+                    lista[j+1][0] = lista[j][0]
+                    lista[j][0] = aux
 
 def mostrar_paciente_mayor_dias_internacion(lista: list) -> int:
+    """busca el paciente con mas dias de internacion
+
+    Args:
+        lista (list): lista de pacientes
+
+    Returns:
+        int: retorna el apciente con mas dias de internacion
+    """
     bandera = 0
     for paciente in lista:
         if bandera == 0 or paciente[4] > paciente_mayor_dias[4]:
@@ -45,6 +87,14 @@ def mostrar_paciente_mayor_dias_internacion(lista: list) -> int:
     return paciente_mayor_dias
 
 def mostrar_paciente_menor_dias_internacion(lista: list) -> int:
+    """busca el paciente con menos dias de internacion
+
+    Args:
+        lista (list): lista de pacientes
+
+    Returns:
+        int: retorna el apciente con menos dias de internacion
+    """
     bandera = 0
     for paciente in lista:
         if bandera == 0 or paciente[4] < paciente_menor_dias[4]:
@@ -53,6 +103,14 @@ def mostrar_paciente_menor_dias_internacion(lista: list) -> int:
     return paciente_menor_dias
 
 def buscar_pacientes_mas_cinco_dias_internacion(lista: list) -> int:
+    """da el numero de pacientes con mas de cinco dias de internacion
+
+    Args:
+        lista (list): lista de pacientes
+
+    Returns:
+        int: retorna el contador de pacientes con mas de 5 dias de internacion
+    """
     contador = 0
     for paciente in lista:
         if paciente[4] >= 5:
@@ -60,6 +118,14 @@ def buscar_pacientes_mas_cinco_dias_internacion(lista: list) -> int:
     return contador
 
 def calcular_promedio_dias_internacion(lista: list) -> int:
+    """calcula el promedio de dias de internacion de todos los pacientes
+
+    Args:
+        lista (list): lista de pacientes
+
+    Returns:
+        int: retorna el promedio de dias de internacion
+    """
     promedio = 0
     for paciente in lista:
         promedio = promedio + paciente[4] 
